@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pong2P_MVP20_08", "Pong2P_MVP20_08\Pong2P_MVP20_08.csproj", "{307927C3-D3F4-4946-8A12-0068A0E979FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{307927C3-D3F4-4946-8A12-0068A0E979FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{307927C3-D3F4-4946-8A12-0068A0E979FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{307927C3-D3F4-4946-8A12-0068A0E979FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{307927C3-D3F4-4946-8A12-0068A0E979FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D75ACB8-8994-4FB3-98BF-4D07F2790C3B}
+	EndGlobalSection
+EndGlobal
