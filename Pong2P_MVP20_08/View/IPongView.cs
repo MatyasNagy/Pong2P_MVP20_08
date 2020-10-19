@@ -8,6 +8,7 @@ namespace Pong2P_MVP20_08.View
 {
     interface IPongView
     {
+        event EventHandler GameStarted;
 
         //int RacketLeft_Left { get; set; }
         bool Is_Closed { set; }

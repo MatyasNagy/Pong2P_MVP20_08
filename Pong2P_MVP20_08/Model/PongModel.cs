@@ -2,18 +2,76 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Pong2P_MVP20_08.Model
 {
-    class PongModel : IPongModel
+    public class PongModel : IPongModel
     {
+        private readonly Timer timer = new Timer(1000);
+
+        private int _stepIntervallInSeconds;
+        public int StepIntervallInSeconds 
+        { 
+            get => _stepIntervallInSeconds;
+            set
+            {
+                this._stepIntervallInSeconds = value;
+                timer.Interval = value * 1000;
+            }
+        }
+
+        public PongModel()
+        {
+            timer.Elapsed += Timer_Elapsed;
+        }
+
+        public void StartGame()
+        {
+            timer.Start();
+        }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         int BallSpeed = 5;
         int BallAngle = 5;
 
         //Minimális változók a logika működéséhez
-        public int score { get; set; }
+        public int Score { get; set; }
+
+        private Point _ballPosition = new Point { X = 0, Y = 0 };
+        public Point BallPosition 
+        {
+            get => _ballPosition; 
+            set
+            {
+                var _ballPosition = "asdf";
+                this._ballPosition = value;
+                OnBallPositionChanged();
+            }
+        }
+        public event EventHandler BallPositionChanged;
+        protected virtual void OnBallPositionChanged()
+        {
+            if(BallPositionChanged!= null)
+            {
+                BallPositionChanged(this, EventArgs.Empty);
+            }
+        }
+
+        public Point LeftRacketPosition { get; set; }
+        public Point RightRacketPosition { get; set; }
+
+
+        //TODO: remove the method and use the event
+        public event EventHandler GameOverEvent;
+
 
         public string GameOverLabel_Text { get; set; }
         public bool GameOverLabel_Visible { get; set; }
@@ -74,7 +132,7 @@ namespace Pong2P_MVP20_08.Model
             timer_Enabled = true;
             BallSpeed = 5;
             BallAngle = 2;
-            score = 0;
+            Score = 0;
             Scoring(0);
             return timer_Enabled;
           
@@ -109,6 +167,13 @@ namespace Pong2P_MVP20_08.Model
             IsClosed = true;
             return IsClosed;
         }
+
+        public void LeftRackatUp(){}
+        public void LeftRackatDown() { }
+
+        public void RightRackatUp() { }
+        public void RightRackatDown() { }
+
 
         public void KeyUp()
         {
@@ -216,8 +281,8 @@ namespace Pong2P_MVP20_08.Model
 
             int PlayGround_Height = PlayGround_Bottom;
 
-            if (loser_playerID == 2) {  GameOverLabel_Text = "GAME OVER\nWinner: Player1\nScore: " + score.ToString() + "\nRestart: F1\nExit: Esc"; }
-            if (loser_playerID == 1) {  GameOverLabel_Text = "GAME OVER\nWinner: Player2\nScore: " + score.ToString() + "\nRestart: F1\nExit: Esc"; }
+            if (loser_playerID == 2) {  GameOverLabel_Text = "GAME OVER\nWinner: Player1\nScore: " + Score.ToString() + "\nRestart: F1\nExit: Esc"; }
+            if (loser_playerID == 1) {  GameOverLabel_Text = "GAME OVER\nWinner: Player2\nScore: " + Score.ToString() + "\nRestart: F1\nExit: Esc"; }
 
             
             GameOverLabel_Visible = true;
@@ -227,9 +292,9 @@ namespace Pong2P_MVP20_08.Model
 
         private void Scoring(int sco)
         {
-            score += sco;
+            Score += sco;
             // changing ball speed
-            if (score % 5 == 0 && score > 0)
+            if (Score % 5 == 0 && Score > 0)
             {
                 BallSpeed += 2;
             }

@@ -17,11 +17,24 @@ namespace Pong2P_MVP20_08.Presenter
         public int score { get; set; }
 
 
-        public PongPresenter(IPongView PView, IPongModel PModel)
+        public PongPresenter(IPongView pView, IPongModel pModel)
         {
-            pongView = PView;
-            pongModel = PModel;
+            pongView = pView;
+            pongModel = pModel;
+            pongModel.BallPositionChanged += PongModel_BallPositionChanged;
+            pView.GameStarted += PView_GameStarted;
         }
+
+        private void PView_GameStarted(object sender, EventArgs e)
+        {
+            pongModel.StartGame();
+        }
+
+        private void PongModel_BallPositionChanged(object sender, EventArgs e)
+        {
+
+        }
+
         public void ConnectBetweenModelAndView()
         {
 
@@ -55,7 +68,7 @@ namespace Pong2P_MVP20_08.Presenter
             pongView.Ball_Top = pongModel.BallMove().Ball_Top;
             pongView.GameOverLabel_Visible = pongModel.GameOverLabel_Visible;
             GameOverLabel_Text = pongModel.GameOverLabel_Text;
-            score = pongModel.score;
+            score = pongModel.Score;
 
         }
 

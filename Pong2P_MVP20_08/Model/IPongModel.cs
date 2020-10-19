@@ -9,7 +9,7 @@ namespace Pong2P_MVP20_08.Model
     interface IPongModel
     {
         string GameOverLabel_Text { get; set; }
-        int score { get; set; }
+        int Score { get; set; }
         bool GameOverLabel_Visible { get; set; }
         bool timer_Enabled { get; set; }
         bool IsClosed { get; set; }
@@ -29,5 +29,15 @@ namespace Pong2P_MVP20_08.Model
         bool ResetGame();
         void KeyDown();
         void KeyUp();
+
+        Point BallPosition { get; set; }
+        event EventHandler BallPositionChanged;
+
+        void StartGame();
+        void LeftRackatUp();
+        void LeftRackatDown();
+
+        void RightRackatUp();
+        void RightRackatDown();
     }
 }

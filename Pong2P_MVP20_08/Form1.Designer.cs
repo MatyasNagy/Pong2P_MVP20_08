@@ -128,6 +128,7 @@
             this.Controls.Add(this.PlayGround);
             this.Name = "Form1";
             this.Text = "Pong 1v1";
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.PlayGround.ResumeLayout(false);

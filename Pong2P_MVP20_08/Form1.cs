@@ -40,6 +40,15 @@ namespace Pong2P_MVP20_08
 
         bool timerACTION;
 
+        public event EventHandler GameStarted;
+        protected void OnGameStarted()
+        {
+            if(GameStarted != null)
+            {
+                GameStarted(this, EventArgs.Empty);
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -62,8 +71,6 @@ namespace Pong2P_MVP20_08
             pongPresenter.ConnectBetweenModelAndView();
             timerACTION = pongPresenter.ResetGame();
             timer.Enabled = timerACTION;
-
-            
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -85,6 +92,10 @@ namespace Pong2P_MVP20_08
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if(e.KeyCode == Keys.F1)
+            {
+                OnGameStarted();
+            }
             //
             // To much keys down at a sametime, it must recognize for the pressed buttons
             //
@@ -93,6 +104,11 @@ namespace Pong2P_MVP20_08
             pongPresenter.KeyDown();
  
 
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            OnGameStarted();
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
